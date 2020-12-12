@@ -20,7 +20,7 @@
  *   5, 5  => 25
  */
 function getRectangleArea(width, height) {
-    return width * height;
+  return width * height;
 }
 
 
@@ -36,7 +36,7 @@ function getRectangleArea(width, height) {
  *   0    => 0
  */
 function getCicleCircumference(radius) {
-    return 2 * Math.PI * radius;
+  return 2 * Math.PI * radius;
 }
 
 /**
@@ -52,7 +52,7 @@ function getCicleCircumference(radius) {
  *  -3, 3  => 0
  */
 function getAverage(value1, value2) {
-    return value1 / 2 + value2 / 2;
+  return value1 / 2 + value2 / 2;
 }
 
 /**
@@ -71,7 +71,7 @@ function getAverage(value1, value2) {
  *   (-5,0) (10,-10) => 18.027756377319946
  */
 function getDistanceBetweenPoints(x1, y1, x2, y2) {
-    return Math.sqrt(((x2 - x1) ** 2) + ((y2 - y1) ** 2));
+  return Math.sqrt(((x2 - x1) ** 2) + ((y2 - y1) ** 2));
 }
 
 /**
@@ -87,7 +87,7 @@ function getDistanceBetweenPoints(x1, y1, x2, y2) {
  *   5*x = 0         => 0
  */
 function getLinearEquationRoot(a, b) {
-    return -b / a;
+  return -b / a;
 }
 
 
@@ -110,8 +110,8 @@ function getLinearEquationRoot(a, b) {
  *   (0,1) (1,2)     => 0
  */
 function getAngleBetweenVectors(x1, y1, x2, y2) {
-    // eslint-disable-next-line max-len
-    return Math.acos((x1 * x2 + y1 * y2) / (Math.sqrt(x1 * x1 + y1 * y1) * Math.sqrt(x2 * x2 + y2 * y2)));
+  // eslint-disable-next-line max-len
+  return Math.acos((x1 * x2 + y1 * y2) / (Math.sqrt(x1 * x1 + y1 * y1) * Math.sqrt(x2 * x2 + y2 * y2)));
 }
 
 /**
@@ -127,7 +127,7 @@ function getAngleBetweenVectors(x1, y1, x2, y2) {
  *     0     => 0
  */
 function getLastDigit(value) {
-    return Number(String(value)[String(value).length - 1]);
+  return Number(String(value)[String(value).length - 1]);
 }
 
 
@@ -143,7 +143,7 @@ function getLastDigit(value) {
  * '-525.5'     => -525.5
  */
 function parseNumberFromString(value) {
-    return Number(value);
+  return Number(value);
 }
 
 /**
@@ -160,7 +160,7 @@ function parseNumberFromString(value) {
  *   1,2,3   => 3.741657386773941
  */
 function getParallelipidedDiagonal(a, b, c) {
-    return Math.sqrt(a ** 2 + b ** 2 + c ** 2);
+  return Math.sqrt(a ** 2 + b ** 2 + c ** 2);
 }
 
 /**
@@ -181,8 +181,8 @@ function getParallelipidedDiagonal(a, b, c) {
  *   1678, 3  => 2000
  */
 function roundToPowerOfTen(num, pow) {
-    // eslint-disable-next-line no-restricted-properties
-    return Math.round(num / Math.pow(10, pow)) * Math.pow(10, pow);
+  // eslint-disable-next-line no-restricted-properties
+  return Math.round(num / Math.pow(10, pow)) * Math.pow(10, pow);
 }
 
 /**
@@ -203,14 +203,14 @@ function roundToPowerOfTen(num, pow) {
  *   17 => true
  */
 function isPrime(n) {
-    if (n <= 3) return n > 1;
-    if ((n % 2 === 0) || (n % 3 === 0)) return false;
-    let i = 5;
-    while (i ** 2 <= n) {
-        if ((n % i === 0) || (n % (i + 2) === 0)) return false;
-        i += 6;
-    }
-    return true;
+  if (n <= 3) return n > 1;
+  if ((n % 2 === 0) || (n % 3 === 0)) return false;
+  let i = 5;
+  while (i ** 2 <= n) {
+    if ((n % i === 0) || (n % (i + 2) === 0)) return false;
+    i += 6;
+  }
+  return true;
 }
 
 /**
@@ -229,21 +229,21 @@ function isPrime(n) {
  *   toNumber(new Number(42), 0) => 42
  */
 function toNumber(value, def) {
-    if (Number(value)) return Number(value);
-    return def;
+  if (Number(value)) return Number(value);
+  return def;
 }
 
 module.exports = {
-    getRectangleArea,
-    getCicleCircumference,
-    getAverage,
-    getDistanceBetweenPoints,
-    getLinearEquationRoot,
-    getAngleBetweenVectors,
-    getLastDigit,
-    parseNumberFromString,
-    getParallelipidedDiagonal,
-    roundToPowerOfTen,
-    isPrime,
-    toNumber,
+  getRectangleArea,
+  getCicleCircumference,
+  getAverage,
+  getDistanceBetweenPoints,
+  getLinearEquationRoot,
+  getAngleBetweenVectors,
+  getLastDigit,
+  parseNumberFromString,
+  getParallelipidedDiagonal,
+  roundToPowerOfTen,
+  isPrime,
+  toNumber,
 };

@@ -15,10 +15,5 @@ module.exports = {
     parserOptions: {
         ecmaVersion: 2018,
     },
-    rules: {
-        "linebreak-style": 0,
-        "indent": ["error", 4, { "SwitchCase": 1 }],
-        "space-in-parens": [2, "never"],
-        "eol-last": ["error", "never"],
-    },
+    rules: {},
 };

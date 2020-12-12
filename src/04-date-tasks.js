@@ -20,7 +20,7 @@
  *    'Sun, 17 May 1998 03:00:00 GMT+01' => Date()
  */
 function parseDataFromRfc2822(value) {
-    return Date.parse(value);
+  return Date.parse(value);
 }
 
 /**
@@ -35,7 +35,7 @@ function parseDataFromRfc2822(value) {
  *    '2016-01-19T08:07:37Z' => Date()
  */
 function parseDataFromIso8601(value) {
-    return Date.parse(value);
+  return Date.parse(value);
 }
 
 
@@ -58,11 +58,11 @@ function parseDataFromIso8601(value) {
 иначе (это високосный год)
  */
 function isLeapYear(date) {
-    const year = date.getFullYear();
-    if (year % 4 !== 0) return false;
-    if (year % 100 !== 0) return true;
-    if (year % 400 !== 0) return false;
-    return true;
+  const year = date.getFullYear();
+  if (year % 4 !== 0) return false;
+  if (year % 100 !== 0) return true;
+  if (year % 400 !== 0) return false;
+  return true;
 }
 
 
@@ -82,21 +82,21 @@ function isLeapYear(date) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
 function timeSpanToString(startDate, endDate) {
-    let delta = endDate - startDate;
-    let sss = delta % 1000;
-    delta = (delta - sss) / 1000;
-    const HH = Math.floor(delta / 3600);
-    delta -= HH * 3600;
-    const mm = Math.floor(delta / 60) % 60;
-    delta -= mm * 60;
-    const ss = delta % 60;
-    sss = sss.toString().padStart(3, '0');
+  let delta = endDate - startDate;
+  let sss = delta % 1000;
+  delta = (delta - sss) / 1000;
+  const HH = Math.floor(delta / 3600);
+  delta -= HH * 3600;
+  const mm = Math.floor(delta / 60) % 60;
+  delta -= mm * 60;
+  const ss = delta % 60;
+  sss = sss.toString().padStart(3, '0');
 
-    function addZero(n) {
-        return (parseInt(n, 10) < 10 ? '0' : '') + n;
-    }
-    const pTime = `${addZero(HH)}:${addZero(mm)}:${addZero(ss)}.${sss}`;
-    return pTime;
+  function addZero(n) {
+    return (parseInt(n, 10) < 10 ? '0' : '') + n;
+  }
+  const pTime = `${addZero(HH)}:${addZero(mm)}:${addZero(ss)}.${sss}`;
+  return pTime;
 }
 
 
@@ -117,19 +117,19 @@ function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
 function angleBetweenClockHands(date) {
-    let delta = Math.abs(0.5 * (60 * date.getUTCHours() - 11 * date.getUTCMinutes()));
-    delta %= 360;
-    if (delta > 180) {
-        delta = 360 - delta;
-    }
-    return (delta * Math.PI) / 180;
+  let delta = Math.abs(0.5 * (60 * date.getUTCHours() - 11 * date.getUTCMinutes()));
+  delta %= 360;
+  if (delta > 180) {
+    delta = 360 - delta;
+  }
+  return (delta * Math.PI) / 180;
 }
 
 
 module.exports = {
-    parseDataFromRfc2822,
-    parseDataFromIso8601,
-    isLeapYear,
-    timeSpanToString,
-    angleBetweenClockHands,
+  parseDataFromRfc2822,
+  parseDataFromIso8601,
+  isLeapYear,
+  timeSpanToString,
+  angleBetweenClockHands,
 };
