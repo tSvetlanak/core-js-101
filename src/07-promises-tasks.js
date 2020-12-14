@@ -57,15 +57,6 @@ function willYouMarryMe(isPositiveAnswer) {
  *
  */
 function processAllPromises(array) {
-  /*  const a = [];
-  // eslint-disable-next-line func-names
-  (async function () {
-    // eslint-disable-next-line no-restricted-syntax
-    for await (const p of array) {
-      a.push(p);
-    }
-  }());
-  return a; */
   return array.reduce(
     (promiseChain, currentTask) => promiseChain.then(
       (chainResults) => currentTask.then(
@@ -73,9 +64,6 @@ function processAllPromises(array) {
       ),
     ), Promise.resolve([]),
   );
-  // .then((arrayOfResults) => {
-  // Do something with all results
-  // });
 }
 
 /**
@@ -97,8 +85,8 @@ function processAllPromises(array) {
  *    })
  *
  */
-function getFastestPromise(array) {
-  /*  const a = [];
+// function getFastestPromise(array) {
+/*  const a = [];
   // eslint-disable-next-line func-names
   (async function () {
     // eslint-disable-next-line no-restricted-syntax
@@ -107,7 +95,7 @@ function getFastestPromise(array) {
     }
   }());
   return a; */
-}
+// }
 
 /**
  * Return Promise object that should be resolved with value that is
@@ -133,6 +121,6 @@ function chainPromises(/* array, action */) {
 module.exports = {
   willYouMarryMe,
   processAllPromises,
-  getFastestPromise,
+  // getFastestPromise,
   chainPromises,
 };
