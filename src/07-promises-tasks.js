@@ -55,7 +55,7 @@ function willYouMarryMe(isPositiveAnswer) {
  *      console.log(res) // => [1, 2, 3]
  *    })
  *
- */
+
 function processAllPromises(array) {
   return array.reduce(
     (promiseChain, currentTask) => promiseChain.then(
@@ -65,7 +65,7 @@ function processAllPromises(array) {
     ), Promise.resolve([]),
   );
 }
-
+*/
 /**
  * Return Promise object that should be resolved with value received from
  * Promise object that will be resolved first.
@@ -120,7 +120,7 @@ function chainPromises(/* array, action */) {
 
 module.exports = {
   willYouMarryMe,
-  processAllPromises,
+  // processAllPromises,
   // getFastestPromise,
   chainPromises,
 };
