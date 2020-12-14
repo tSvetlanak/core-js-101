@@ -56,8 +56,26 @@ function willYouMarryMe(isPositiveAnswer) {
  *    })
  *
  */
-function processAllPromises(/* array */) {
-  throw new Error('Not implemented');
+function processAllPromises(array) {
+  /*  const a = [];
+  // eslint-disable-next-line func-names
+  (async function () {
+    // eslint-disable-next-line no-restricted-syntax
+    for await (const p of array) {
+      a.push(p);
+    }
+  }());
+  return a; */
+  return array.reduce(
+    (promiseChain, currentTask) => promiseChain.then(
+      (chainResults) => currentTask.then(
+        (currentResult) => [...chainResults, currentResult],
+      ),
+    ), Promise.resolve([]),
+  );
+  // .then((arrayOfResults) => {
+  // Do something with all results
+  // });
 }
 
 /**
@@ -79,8 +97,16 @@ function processAllPromises(/* array */) {
  *    })
  *
  */
-function getFastestPromise(/* array */) {
-  throw new Error('Not implemented');
+function getFastestPromise(array) {
+  /*  const a = [];
+  // eslint-disable-next-line func-names
+  (async function () {
+    // eslint-disable-next-line no-restricted-syntax
+    for await (const p of array) {
+      a.push(p);
+    }
+  }());
+  return a; */
 }
 
 /**
