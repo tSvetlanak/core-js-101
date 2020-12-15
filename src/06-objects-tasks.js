@@ -123,56 +123,89 @@ function fromJSON(proto, json) {
  *
  *  For more examples see unit tests.
  */
-/*
-const cssSelectorBuilder = {
-  const  MySuperBaseElementSelector = class {
-     constructor(elem, idpar, naimClass, attr,
-  pseudoClass, pseudoElement, selectors){
-    this.elem = elem;
-    this.idpar = idpar;
-  this.naimClass = naimClass;
-    this.at = attr;
-    this.pClass = pseudoClass;
-    this.pElement = pseudoElement;
-    this.selectors = selectors;
-     }
 
-  },
+class Selector {
+  constructor() {
+    this.result = '';
+    this.step = 0;
+    this.error = {
+      wrongOrder: 'Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element',
+      wrongOccurancy: 'Element, id and pseudo-element should not occur more then one time inside the selector',
+    };
+  }
 
+  set position(next) {
+    if (next < this.step) throw new Error(this.error.wrongOrder);
+    this.step = next;
+  }
 
- element: function(value) {
-   return new MySuperBaseElementSelector(...);
-  },
+  element(value) {
+    this.position = 0;
+    if (this.elementOccured) throw new Error(this.error.wrongOccurancy);
+    this.elementOccured = true;
+    this.result += value;
+    return this;
+  }
 
-id() {
-  return `#${ this.idpar}`;
-  },
+  id(value) {
+    this.position = 1;
+    if (this.idOccured) throw new Error(this.error.wrongOccurancy);
+    this.idOccured = true;
+    this.result += `#${value}`;
+    return this;
+  }
 
-  class() {
-  return `.${this.naimClass}`;
-  },
+  class(value) {
+    this.position = 2;
+    this.result += `.${value}`;
+    return this;
+  }
 
-  attr() {
-  return `[${this.at}]`;
-  },
+  attr(value) {
+    this.position = 3;
+    this.result += `[${value}]`;
+    return this;
+  }
 
-  pseudoClass() {
-  return `:${ this.pClass}`;
-  },
+  pseudoClass(value) {
+    this.position = 4;
+    this.result += `:${value}`;
+    return this;
+  }
 
-  pseudoElement() {
-  return `::${ this.pElement}`;
-  },
+  pseudoElement(value) {
+    this.position = 5;
+    if (this.pseudoElementOccured) throw new Error(this.error.wrongOccurancy);
+    this.pseudoElementOccured = true;
+    this.result += `::${value}`;
+    return this;
+  }
 
   combine(selector1, combinator, selector2) {
-    return selector1 + combinator + selector2;
+    this.result = `${selector1.stringify()} ${combinator} ${selector2.stringify()}`;
+    return this;
+  }
+
+  stringify() {
+    return this.result;
+  }
+}
+
+const cssSelectorBuilder = {
+  generateMethods() {
+    ['element', 'id', 'class', 'attr', 'pseudoClass', 'pseudoElement', 'combine']
+      .forEach((selector) => {
+        cssSelectorBuilder[selector] = (selector === 'combine')
+          ? (s1, combinator, s2) => new Selector()[selector](s1, combinator, s2)
+          : (value) => new Selector()[selector](value);
+      });
   },
 };
 
- */
+cssSelectorBuilder.generateMethods();
 module.exports = {
   Rectangle,
   getJSON,
   fromJSON,
-  // cssSelectorBuilder,
+  cssSelectorBuilder,
 };

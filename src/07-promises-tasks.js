@@ -55,17 +55,11 @@ function willYouMarryMe(isPositiveAnswer) {
  *      console.log(res) // => [1, 2, 3]
  *    })
  *
-
-function processAllPromises(array) {
-  return array.reduce(
-    (promiseChain, currentTask) => promiseChain.then(
-      (chainResults) => currentTask.then(
-        (currentResult) => [...chainResults, currentResult],
-      ),
-    ), Promise.resolve([]),
-  );
-}
 */
+function processAllPromises(array) {
+  return Promise.all(array);
+}
+
 /**
  * Return Promise object that should be resolved with value received from
  * Promise object that will be resolved first.
@@ -85,17 +79,9 @@ function processAllPromises(array) {
  *    })
  *
  */
-// function getFastestPromise(array) {
-/*  const a = [];
-  // eslint-disable-next-line func-names
-  (async function () {
-    // eslint-disable-next-line no-restricted-syntax
-    for await (const p of array) {
-      a.push(p);
-    }
-  }());
-  return a; */
-// }
+function getFastestPromise(array) {
+  return Promise.race(array);
+}
 
 /**
  * Return Promise object that should be resolved with value that is
@@ -114,13 +100,28 @@ function processAllPromises(array) {
  *    });
  *
  */
-function chainPromises(/* array, action */) {
-  throw new Error('Not implemented');
+function chainPromises(array, action) {
+  const results = [];
+  let len = array.length;
+  return new Promise((resolve) => {
+    // const resolveIt = () => { if (results.length === len) resolve(results.reduce(action)); };
+    array.forEach((promise) => {
+      promise
+        .then((nextPromise) => {
+          results.push(nextPromise);
+          if (results.length === len) resolve(results.reduce(action));
+        })
+        .catch(() => {
+          len -= 1;
+          if (results.length === len) resolve(results.reduce(action));
+        });
+    });
+  });
 }
 
 module.exports = {
   willYouMarryMe,
-  // processAllPromises,
-  // getFastestPromise,
+  processAllPromises,
+  getFastestPromise,
   chainPromises,
 };
